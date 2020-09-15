@@ -9,69 +9,54 @@ import Saturn from './Saturn.svelte';
 import Uranus from './Uranus.svelte';
 import Neptune from './Neptune.svelte';
 
-const z = (scale, x, y) => `${scale},0,0,${scale},${-(scale - 1) * x},${-(scale - 1) * y}`;
+import ScaleFromMars from './Animations/ScaleFromMars.svelte';
+import TranslateFromMars from './Animations/TranslateFromMars.svelte';
 
-
-const values = [1000, 1];
-const x = 1413;
-const y = 2485;
-const translate = scale => scale === 1 ? '0,0' : `${-(scale - 1) * x},${-(scale - 1) * y}`;
-const keySplines = '0 .7 0 1';
-const duration = '100s';
-
-const valuesTranslate = values.map(translate);
+import { SYSTEM_RADIUS_PX } from './dimensions.js';
 </script>
 <style>
-.space {
+.holder {
     position: absolute;
+    width: 0;
+    height: 0;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 100%;
+}
+.space {
+    transform: translate(-50%, -50%);
 }
 
 @media (orientation: portrait) {
     .space {
-        width: auto;
-        height: 100%;
+        height: 100vh;
+    }
+}
+@media (orientation: landscape) {
+    .space {
+        width: 100vw;
     }
 }
 </style>
 
-<svg class="space" viewBox="0 0 5000 5000">
-    <g>
-        <animateTransform
-            attributeName="transform"
-            attributeType="XML"
-            type="translate"
-            dur="{duration}"
-            calcMode="spline"
-            keySplines="{keySplines}"
-            values="{valuesTranslate.join(';')}"
-            repeatCount="indefinite"
-        />
+<div class="holder">
+    <svg class="space" viewBox="0 0 {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
         <g>
-            <animateTransform
-                attributeName="transform"
-                attributeType="XML"
-                type="scale"
-                dur="{duration}"
-                calcMode="spline"
-                keySplines="{keySplines}"
-                values="{values.join(';')}"
-                repeatCount="indefinite"
-            />
-            <Sun/>
-            <Mercury/>
-            <Venus/>
-            <Earth/>
-            <Mars/>
-            <Jupiter/>
-            <Saturn/>
-            <Uranus/>
-            <Neptune/>
+            <TranslateFromMars/>
+            <g>
+                <ScaleFromMars/>
+                <Sun/>
+                <Mercury/>
+                <Venus/>
+                <Earth/>
+                <Mars/>
+                <Jupiter/>
+                <Saturn/>
+                <Uranus/>
+                <Neptune/>
+            </g>
         </g>
-    </g>
-</svg>
+    </svg>
+</div>

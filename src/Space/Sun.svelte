@@ -1,3 +1,10 @@
+<script>
+import { SYSTEM_RADIUS_PX } from './dimensions.js';
+
+const galo = SYSTEM_RADIUS_PX * 0.8;
+const r = SYSTEM_RADIUS_PX / 10;
+
+</script>
 <radialGradient id="sun-galo"
     cx="50%" y="50%">
 <stop offset="0" stop-color="rgba(211,101,5,.2)"/>
@@ -18,7 +25,7 @@
 </radialGradient>
 
 <g class="sun">
-<circle class="sun-bg" cx="2500" cy="2500" r="2000" fill="url(#sun-galo)" stroke="none" />
-<circle class="sun-bg" cx="2500" cy="2500" r="250" fill="url(#sun-base)" stroke="none" />
-<circle class="sun-light" cx="2500" cy="2500" r="250" fill="url(#sun-light)" stroke="none" />
+<circle class="sun-bg" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{galo}" fill="url(#sun-galo)" stroke="none" />
+<circle class="sun-bg" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{r}" fill="url(#sun-base)" stroke="none" />
+<circle class="sun-light" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{r}" fill="url(#sun-light)" stroke="none" />
 </g>
