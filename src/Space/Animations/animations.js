@@ -1,6 +1,6 @@
 import { mars } from '../dimensions.js';
 
-export const PLANETARY_DURATION = '10s';
+export const PLANETARY_DURATION = '100s';
 export const PLANETARY_SPLINES = '0 .7 0 1';
 
 export const FROM_MARS = {
