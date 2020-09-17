@@ -11,19 +11,26 @@ import Neptune from './Neptune.svelte';
 
 import ScaleFromMars from './Animations/ScaleFromMars.svelte';
 import TranslateFromMars from './Animations/TranslateFromMars.svelte';
+import { FROM_MARS, MARS_SCALE_FACTOR } from './Animations/animations.js';
 
-import { SYSTEM_RADIUS_PX } from './dimensions.js';
+import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
 </script>
 <style>
-.holder {
+.container {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.center {
     position: absolute;
     width: 0;
     height: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+    top: 50%;
+    left: 50%;
 }
 .space {
     transform: translate(-50%, -50%);
@@ -39,24 +46,23 @@ import { SYSTEM_RADIUS_PX } from './dimensions.js';
         width: 100vw;
     }
 }
-</style>
 
-<div class="holder">
-    <svg class="space" viewBox="0 0 {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
-        <g>
-            <TranslateFromMars/>
-            <g>
-                <ScaleFromMars/>
-                <Sun/>
-                <Mercury/>
-                <Venus/>
-                <Earth/>
-                <Mars/>
-                <Jupiter/>
-                <Saturn/>
-                <Uranus/>
-                <Neptune/>
+</style>
+<div class="container">
+    <div class="center">
+        <svg class="space" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
+            <g transform="scale(3500)">
+            <!-- <ScaleFromMars/> -->
+            <Sun/>
+            <Mercury/>
+            <Venus/>
+            <Earth/>
+            <Mars/>
+            <Jupiter/>
+            <Saturn/>
+            <Uranus/>
+            <Neptune/>
             </g>
-        </g>
-    </svg>
+        </svg>
+    </div>
 </div>

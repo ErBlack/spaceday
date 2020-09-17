@@ -1,8 +1,9 @@
 <script>
-import { SYSTEM_RADIUS_PX } from './dimensions.js';
+import { SYSTEM_RADIUS_PX, sun } from './dimensions.js';
 
 const galo = SYSTEM_RADIUS_PX * 0.8;
-const r = SYSTEM_RADIUS_PX / 10;
+
+const { r, centerX, size } = sun;
 
 </script>
 <radialGradient id="sun-galo"
@@ -25,7 +26,7 @@ const r = SYSTEM_RADIUS_PX / 10;
 </radialGradient>
 
 <g class="sun">
-<circle class="sun-bg" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{galo}" fill="url(#sun-galo)" stroke="none" />
-<circle class="sun-bg" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{r}" fill="url(#sun-base)" stroke="none" />
-<circle class="sun-light" cx="{SYSTEM_RADIUS_PX}" cy="{SYSTEM_RADIUS_PX}" r="{r}" fill="url(#sun-light)" stroke="none" />
+<circle class="sun-bg" cx="{centerX + size}" cy="0" r="{galo}" fill="url(#sun-galo)" stroke="none" />
+<circle class="sun-bg" cx="{centerX + size}" cy="0" r="{r}" fill="url(#sun-base)" stroke="none" />
+<circle class="sun-light" cx="{centerX + size}" cy="0" r="{r}" fill="url(#sun-light)" stroke="none" />
 </g>

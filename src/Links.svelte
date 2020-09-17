@@ -24,18 +24,14 @@
 	
 	.icon {
 		display: block;
-		opacity: 0;
-		animation-fill-mode: forwards;
 		margin-right: .3em;
 	}
 	
 	.row {
-		width: 20em;
-		overflow: hidden;
-		white-space: nowrap;
 		display: flex;
-		line-height: 1.8em;
-    	align-items: center;
+		line-height: 1em;
+		align-items: center;
+		padding: .2em 0;
 	}
 </style>
 <div>
