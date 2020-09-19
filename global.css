@@ -10,9 +10,9 @@ body {
 	box-sizing: border-box;
 	overflow: hidden;
 	background-color: #21204A;
-	background-image: radial-gradient(rgba(33, 32, 74, 0), rgba(33, 32, 74, .5)), url("/spaceday/bg.jpg");
-	background-size: cover, cover;
-	background-repeat: no-repeat, no-repeat;
+	background-image: url("/spaceday/bg.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
 	box-shadow: inset 0 0 5vw rgba(0,0,0,.2);
 }
 
