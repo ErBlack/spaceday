@@ -17,7 +17,7 @@
 		margin: 50px auto;
 		padding: 0 25px;
 		z-index: 1;
-		text-shadow: 0 0 1em rgba(0,0,0,.9);
+		text-shadow: 0 0 1em rgba(0,0,0,.4);
 		font-family: 'Yanone Kaffeesatz', sans-serif;
 	}
 
