@@ -99,14 +99,11 @@ const ontouch = ({touches}) => {
     }
 }
 
-const oncontextmenu = () => false;
-
 Object.assign(document.body, {
     onmousedown,
     onmouseup,
     onkeydown,
     onkeyup,
     ontouchstart: ontouch,
-    ontouchend: ontouch,
-    oncontextmenu
+    ontouchend: ontouch
 });

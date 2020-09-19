@@ -12,13 +12,15 @@
 		color: #fff;
 		left: 0;
 		right: 0;
-		box-sizing: padding-box;
 		max-width: 600px;
-		margin: 50px auto;
-		padding: 0 25px;
+		height: 100%;
+		margin: auto;
+		padding: 50px 25px;
+		box-sizing: border-box;
 		z-index: 1;
 		text-shadow: 0 0 1em rgba(0,0,0,.4);
 		font-family: 'Yanone Kaffeesatz', sans-serif;
+		overflow: auto;
 	}
 
 	section {
