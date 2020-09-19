@@ -79,9 +79,34 @@ const onkeyup = ({key}) => {
     }
 }
 
+const ontouch = ({touches}) => {
+    if (touches.length === 0) {
+        mouseControls.up = false;
+        mouseControls.left = false;
+        mouseControls.right = false;
+    } else {
+        const { innerWidth, innerHeight } = window;
+
+        Array.prototype.forEach.call(touches, ({clientX, clientY}) => {
+            if (clientY < innerHeight / 2) {
+                mouseControls.up = true;
+            } else if (clientX < innerWidth / 2) {
+                mouseControls.left = true;
+            } else {
+                mouseControls.right = true;
+            }
+        })
+    }
+}
+
+const oncontextmenu = () => false;
+
 Object.assign(document.body, {
     onmousedown,
     onmouseup,
     onkeydown,
-    onkeyup
+    onkeyup,
+    ontouchstart: ontouch,
+    ontouchend: ontouch,
+    oncontextmenu
 });
