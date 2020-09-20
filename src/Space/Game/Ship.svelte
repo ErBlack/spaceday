@@ -2,6 +2,8 @@
 import { GameState } from './';
 import { SHIP_WIDTH, SHIP_HEIGHT } from './constants';
 
+const offsetX = SHIP_WIDTH / 2;
+
 let {
     landStatus,
     ship: {x, y}
@@ -15,5 +17,5 @@ GameState.addEventListener('change:ship', ({value}) => {
 
 </script>
 {#if !landStatus || landStatus.success}
-    <image xlink:href="/spaceday/rocket.png" width="{SHIP_HEIGHT}" height="{SHIP_HEIGHT}" x="{x}" y="{y}"/>
+    <image xlink:href="/spaceday/rocket.png" width="{SHIP_HEIGHT}" height="{SHIP_HEIGHT}" x="{x - offsetX}" y="{y}"/>
 {/if}

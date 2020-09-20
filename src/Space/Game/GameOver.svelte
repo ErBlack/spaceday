@@ -61,7 +61,8 @@
     border: solid 1px #fff;
     text-shadow: 0 0 1em rgba(0,0,0,.7);
     background-color: rgba(0,0,0,.1);
-    animation: in .3s ease-out;
+    opacity: 0;
+    animation: in .3s ease-out forwards 1s;
 }
 
 button {
