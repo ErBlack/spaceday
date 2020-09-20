@@ -1,7 +1,7 @@
 import {
     GameState,
     startGame,
-    endGame
+    finishGame
 } from './GameState';
 import { Controls } from './Controls';
 import { atmosphereRadius } from '../Mars';
@@ -15,7 +15,10 @@ import {
     MAX_H_SPEED,
     MAX_V_SPEED,
     SHIP_HEIGHT,
-    CONSUMPTION
+    CONSUMPTION,
+    LANDING_LEFT,
+    LANDING_RIGHT,
+    LANDING_SPEED
 } from './constants';
 
 import { getY } from '../Mars';
@@ -26,14 +29,14 @@ const Game = {
         const {
             ship: {
                 vSpeed,
-                grounded,
+                landed,
                 fuel
             }
         } = GameState;
 
         if (up && fuel !== 0) {
             return Math.max(vSpeed + BOOST * dt, -MAX_V_SPEED);
-        } else if (grounded) {
+        } else if (landed) {
             return 0;
         } else {
             return Math.min(vSpeed + GRAVITY * dt, MAX_V_SPEED);
@@ -44,15 +47,15 @@ const Game = {
         const {
             ship: {
                 hSpeed,
-                grounded,
+                landed,
                 fuel
             }
         } = GameState;
 
-        if (grounded || fuel === 0) return 0;
+        if (landed || fuel === 0) return 0;
         if (left) return Math.max(hSpeed - SHUTING * dt, -MAX_H_SPEED);
         if (right) return Math.min(hSpeed + SHUTING * dt, MAX_H_SPEED);
-        if (hSpeed !== 0) return hSpeed - Math.sign(hSpeed) * FRICTION * dt;
+        if (Math.abs(hSpeed) > 0.001) return hSpeed - Math.sign(hSpeed) * FRICTION * dt;
         return 0;
     },
     getBoost() {
@@ -69,14 +72,43 @@ const Game = {
     getFuelLoss(dt, boost) {
         return dt * (boost / 100) * CONSUMPTION;
     },
+    getLandStatus() {
+        const {
+            x,
+            hSpeed,
+            vSpeed
+        } = GameState.ship;
+
+        const status = {
+            success: true,
+            wrongPlace: false,
+            wrongSpeed: false,
+            wrongHorizontalSpeed: false,
+            landSpeed: vSpeed
+        };
+
+        if (x < LANDING_LEFT || x > LANDING_RIGHT) {
+            status.success = false;
+            status.wrongPlace = true;
+        }
+
+        if (vSpeed > LANDING_SPEED) {
+            status.success = false;
+            status.wrongSpeed = true;
+        }
+
+        if (hSpeed) {
+            status.success = false;
+            status.wrongHorizontalSpeed = true;
+        }
+
+        return status;
+    },
     update(dt) {
         const prevShip = GameState.ship;
         const ship = {...prevShip};
 
-        if (prevShip.grounded) {
-            endGame();
-            return;
-        }
+        if (ship.landed) return;
 
         ship.vSpeed = this.getVSpeed(dt);
         ship.hSpeed = this.getHSpeed(dt);
@@ -91,9 +123,13 @@ const Game = {
         if (ship.y < MAX_Y_OFFSET) console.log('away y');
 
         const bottomLimit = getY(-ship.x) - SHIP_HEIGHT;
-        ship.grounded = ship.y >= bottomLimit;
+        
+        ship.landed = ship.y >= bottomLimit;
 
-        if (ship.grounded) ship.y = bottomLimit;
+        if (ship.landed) {
+            ship.y = bottomLimit;
+            GameState.landStatus = this.getLandStatus();
+        }
 
         ship.alt = bottomLimit - ship.y;
 
@@ -103,6 +139,7 @@ const Game = {
 
 export { 
     Game,
+    GameState,
     startGame,
-    GameState
+    finishGame
 };

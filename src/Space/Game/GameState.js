@@ -11,18 +11,25 @@ const initialShipState = () => ({
     height: SHIP_HEIGHT,
     vSpeed: 0,
     hSpeed: 0,
-    grounded: false,
     alt: 0,
     boost: 0,
-    fuel: 100
+    fuel: 100,
+    landed: false
 });
 const initialState = () => ({
     active: false,
-    completed: false,
-    failed: false,
+    landStatus: null,
     ship: initialShipState()
 })
 
 export const GameState = new State(initialState());
-export const startGame = () => GameState.active = true;
-export const endGame = () => Object.assign(GameState, initialState());
+export const startGame = () => {
+    const { landStatus, ship } = initialState();
+
+    Object.assign(GameState, {
+        landStatus,
+        ship,
+        active: true
+    });
+};
+export const finishGame = () => Object.assign(GameState, initialState());
