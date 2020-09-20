@@ -1,12 +1,12 @@
 <script>
-import { Game } from './Space/Game';
+import { startGame, GameState } from './Space/Game';
 import clicker from './clicker';
 
-	let started = Game.state.started;
+	let active = GameState.active;
 
-	Game.state.addEventListener('change:started', (value) => started = value);
+	GameState.addEventListener('change:active', ({value}) => active = value);
 
-const onClick = clicker(6, 250, () => Game.state.started = true);
+const onClick = clicker(0, 250, startGame);
 
 </script>
 <style>
@@ -28,6 +28,7 @@ h1 {
     white-space: pre;
     user-select: none;
     cursor: pointer;
+    user-select: none;
 }
 
 .title {
@@ -75,4 +76,4 @@ h1 {
   }
 }
 </style>
-<h1 class="{started ? 'active' : 'inactive'}"><span class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</span> <span class="title">Space Day</span></h1>
+<h1 class="{active ? 'active' : 'inactive'}"><span class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</span> <span class="title">Space Day</span></h1>

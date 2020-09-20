@@ -1,32 +1,36 @@
-import { GameState } from './GameState';
+import {
+    GameState,
+    startGame,
+    endGame
+} from './GameState';
 import { Controls } from './Controls';
 import { atmosphereRadius } from '../Mars';
-
-const MAX_Y_OFFSET = 650;
-const MAX_X_OFFSET = 750;
-
-const GRAVITY = 0.007;
-const BOOST = -0.009;
-const SHUTING = 0.002;
-const FRICTION = 0.001;
-
-const MAX_H_SPEED = 6;
-const MAX_V_SPEED = 12;
+import {
+    MAX_X_OFFSET,
+    MAX_Y_OFFSET,
+    GRAVITY,
+    BOOST,
+    SHUTING,
+    FRICTION,
+    MAX_H_SPEED,
+    MAX_V_SPEED,
+    SHIP_HEIGHT
+} from './constants';
 
 import { getY } from '../Mars';
 
-export const Game = {
-    state: GameState,
+const Game = {
     getVSpeed(dt) {
         const {up} = Controls;
         const {
             ship: {
                 vSpeed,
-                grounded
+                grounded,
+                fuel
             }
-        } = this.state;
+        } = GameState;
 
-        if (up) {
+        if (up && fuel !== 0) {
             return Math.max(vSpeed + BOOST * dt, -MAX_V_SPEED);
         } else if (grounded) {
             return 0;
@@ -39,50 +43,60 @@ export const Game = {
         const {
             ship: {
                 hSpeed,
-                grounded
+                grounded,
+                fuel
             }
-        } = this.state;
+        } = GameState;
 
-        if (grounded) return 0;
+        if (grounded || fuel === 0) return 0;
         if (left) return Math.max(hSpeed - SHUTING * dt, -MAX_H_SPEED);
         if (right) return Math.min(hSpeed + SHUTING * dt, MAX_H_SPEED);
         if (hSpeed !== 0) return hSpeed - Math.sign(hSpeed) * FRICTION * dt;
         return 0;
     },
-    update(dt) {
+    getBoost() {
+        if (GameState.ship.fuel === 0) return 0;
+
         const {
-            ship: {
-                x,
-                y,
-                height
-            }
-        } = this.state;
+            up,
+            left,
+            right
+        } = Controls;
 
-        let newVSpeed = this.getVSpeed(dt);
-        let newHSpeed = this.getHSpeed(dt);
+        return (up ? 70 : 0) + (left || right ? 30 : 0);
+    },
+    update(dt) {
+        const prevShip = GameState.ship;
+        const ship = {...prevShip};
 
-        let newX = x + newHSpeed;
-        let newY = y + newVSpeed;
-
-
-        if (Math.abs(atmosphereRadius - newX) > MAX_X_OFFSET) console.log('away x');
-        if (newY < MAX_Y_OFFSET) console.log('away y');
-
-        const bottomLimit = getY(-newX) - height;
-        const newGrounded = newY >= bottomLimit;
-
-        if (newGrounded) {
-            newVSpeed = 0;
-            newHSpeed = 0;
-            newY = bottomLimit;
+        if (prevShip.grounded) {
+            endGame();
+            return;
         }
 
-        this.state.ship.vSpeed = newVSpeed;
-        this.state.ship.hSpeed = newHSpeed;
-        this.state.ship.x = newX;
-        this.state.ship.y = newY;
-        this.state.ship.grounded = newGrounded;
+        ship.vSpeed = this.getVSpeed(dt);
+        ship.hSpeed = this.getHSpeed(dt);
+        ship.boost = this.getBoost();
 
-        return this.state.ship;
+        ship.x += ship.hSpeed;
+        ship.y += ship.vSpeed;
+
+        if (Math.abs(atmosphereRadius - ship.x) > MAX_X_OFFSET) console.log('away x');
+        if (ship.y < MAX_Y_OFFSET) console.log('away y');
+
+        const bottomLimit = getY(-ship.x) - SHIP_HEIGHT;
+        ship.grounded = ship.y >= bottomLimit;
+
+        if (ship.grounded) ship.y = bottomLimit;
+
+        ship.alt = bottomLimit - ship.y;
+
+        GameState.ship = ship;
     }
+};
+
+export { 
+    Game,
+    startGame,
+    GameState
 };

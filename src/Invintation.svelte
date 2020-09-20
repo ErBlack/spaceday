@@ -3,11 +3,11 @@
 	import Links from './Links.svelte';
 	import Twitter from './Twitter.svelte';
 	import Header from './Header.svelte';
-	import { Game } from './Space/Game';
+	import { GameState } from './Space/Game';
 	
-	let started = Game.state.started;
+	let active = GameState.active;
 
-	Game.state.addEventListener('change:started', (value) => started = value);
+	GameState.addEventListener('change:active', ({value}) => active = value);
 
 	const start = new Date('2020-10-17T11:00:00.000Z');
 </script>
@@ -50,18 +50,23 @@
 		animation-fill-mode: forwards;
 	}
 
+	.invintation_game_active {
+		user-select: none;
+		pointer-events: none;
+	}
+
 	@keyframes fade {
-	0% {
-		transform: translateY(0);
-		opacity: 1;
-	}
-	100% {
-		transform: translateY(10px);
-		opacity: 0;
-	}
+		0% {
+			transform: translateY(0);
+			opacity: 1;
+		}
+		100% {
+			transform: translateY(10px);
+			opacity: 0;
+		}
 	}
 </style>
-<div class="invintation invintation_game_{started ? 'active' : 'inactive'}">
+<div class="invintation invintation_game_{active ? 'active' : 'inactive'}">
 	<Header/>
 	<section>
 		Приглашаю на день рождения

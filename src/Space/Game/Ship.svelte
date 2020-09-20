@@ -1,24 +1,25 @@
 <script>
 import { mars } from '../dimensions';
-import { Game } from './index';
+import { Game, GameState } from './';
+import { SHIP_WIDTH, SHIP_HEIGHT } from './constants';
 
 let {
-    x: shipX,
-    y: shipY,
-    width,
-    height
-} = Game.state.ship;
+    active,
+    ship: {
+        x: shipX,
+        y: shipY
+    }
+} = GameState;
 
 let time;
-let started = Game.state.started;
 let startTimeout;
 
-Game.state.addEventListener('change:started', (value) => {
-    started = value;
+GameState.addEventListener('change:active', ({value}) => {
+    active = value;
 
     clearTimeout(startTimeout);
 
-    if (started) {
+    if (active) {
         startTimeout = setTimeout(() => {
             time = Date.now();
             loop();
@@ -27,16 +28,18 @@ Game.state.addEventListener('change:started', (value) => {
 });
 
 const loop = () => {
-    if (!started) return;
+    if (!active) return;
 
     const dt = Date.now() - time;
+
+    Game.update(dt);
+    
+    time += dt;
 
     const {
         x,
         y
-    } =Game.update(dt);
-
-    time += dt;
+    } = GameState.ship;
 
     shipX = x;
     shipY = y;
@@ -44,6 +47,6 @@ const loop = () => {
     requestAnimationFrame(loop);
 }
 </script>
-{#if started}
-<image xlink:href="/spaceday/rocket.png" width="{width}" height="{height}" x="{shipX}" y="{shipY}"/>
+{#if active}
+<image xlink:href="/spaceday/rocket.png" width="{SHIP_HEIGHT}" height="{SHIP_HEIGHT}" x="{shipX}" y="{shipY}"/>
 {/if}
