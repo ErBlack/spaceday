@@ -14,6 +14,9 @@ export const MAX_V_SPEED = 12;
 export const SHIP_WIDTH = 34;
 export const SHIP_HEIGHT = 71;
 
+export const EXPLOSION_WIDTH = 124;
+export const EXPLOSION_HEIGHT = 142;
+
 export const LANDING_LEFT = 4348;
 export const LANDING_RIGHT = 4413;
-export const LANDING_SPEED = 0.8;
+export const LANDING_SPEED = 1;

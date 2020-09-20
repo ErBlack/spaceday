@@ -105,10 +105,10 @@ const Game = {
         return status;
     },
     update(dt) {
+        if (GameState.landStatus) return;
+
         const prevShip = GameState.ship;
         const ship = {...prevShip};
-
-        if (ship.landed) return;
 
         ship.vSpeed = this.getVSpeed(dt);
         ship.hSpeed = this.getHSpeed(dt);
@@ -124,9 +124,7 @@ const Game = {
 
         const bottomLimit = getY(-ship.x) - SHIP_HEIGHT;
         
-        ship.landed = ship.y >= bottomLimit;
-
-        if (ship.landed) {
+        if (ship.y >= bottomLimit) {
             ship.y = bottomLimit;
             GameState.landStatus = this.getLandStatus();
         }
