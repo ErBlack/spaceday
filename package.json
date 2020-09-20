@@ -1,7 +1,7 @@
 {
   "name": "spaceday",
   "private": true,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "devDependencies": {
     "ghpages": "0.0.10",
     "md5": "^2.3.0",
