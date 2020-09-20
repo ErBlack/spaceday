@@ -1,11 +1,14 @@
 <script>
 import { GameState } from './';
+import preload from '../../preloadImage';
 import {
     EXPLOSION_WIDTH,
     EXPLOSION_HEIGHT,
     SHIP_HEIGHT,
     SHIP_WIDTH
 } from './constants';
+
+preload('/spaceday/explosion.gif');
 
 const offsetX = EXPLOSION_WIDTH / 2 - SHIP_WIDTH / 2;
 const offsetY = EXPLOSION_HEIGHT / 2 - 10;
