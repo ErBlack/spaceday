@@ -1,3 +1,14 @@
+<script>
+import { Game } from './Space/Game';
+import clicker from './clicker';
+
+	let started = Game.state.started;
+
+	Game.state.addEventListener('change:started', (value) => started = value);
+
+const onClick = clicker(6, 250, () => Game.state.started = true);
+
+</script>
 <style>
 h1 {
     font-family: "Bungee Shade";
@@ -19,10 +30,49 @@ h1 {
     cursor: pointer;
 }
 
+.title {
+  display: inline-block;
+}
+
+.active .rocket {
+  animation: launch 3s ease-out;
+  animation-fill-mode: forwards;
+}
+.active .title {
+  animation: fade .3s ease-out .3s;
+  animation-fill-mode: forwards;
+}
+
 @media all and (max-width: 550px) {
   h1 {
     font-size: 10vw;
   }
 }
+
+@keyframes launch {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  10% {
+    transform: translateY(5px) scale(1.2);
+  }
+  99% {
+    transform: translateY(-1000px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
 </style>
-<h1><span class="rocket">⠀</span> Space Day</h1>
+<h1 class="{started ? 'active' : 'inactive'}"><span class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</span> <span class="title">Space Day</span></h1>

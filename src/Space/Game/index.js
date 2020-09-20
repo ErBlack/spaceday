@@ -1,4 +1,5 @@
-import { State } from './State';
+import { GameState } from './GameState';
+import { Controls } from './Controls';
 import { atmosphereRadius } from '../Mars';
 
 const MAX_Y_OFFSET = 650;
@@ -15,10 +16,10 @@ const MAX_V_SPEED = 12;
 import { getY } from '../Mars';
 
 export const Game = {
-    state: State,
+    state: GameState,
     getVSpeed(dt) {
+        const {up} = Controls;
         const {
-            controls: {up},
             ship: {
                 vSpeed,
                 grounded
@@ -34,11 +35,8 @@ export const Game = {
         }
     },
     getHSpeed(dt) {
+        const {left, right} = Controls;
         const {
-            controls: {
-                left,
-                right,
-            },
             ship: {
                 hSpeed,
                 grounded

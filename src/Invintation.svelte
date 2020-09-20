@@ -3,7 +3,12 @@
 	import Links from './Links.svelte';
 	import Twitter from './Twitter.svelte';
 	import Header from './Header.svelte';
+	import { Game } from './Space/Game';
 	
+	let started = Game.state.started;
+
+	Game.state.addEventListener('change:started', (value) => started = value);
+
 	const start = new Date('2020-10-17T11:00:00.000Z');
 </script>
 <style>
@@ -39,10 +44,26 @@
 		border-bottom: dotted #ffffff 1px;
 		text-decoration: none;
 	}
+
+	.invintation_game_active section {
+		animation: fade .3s ease-out .3s;
+		animation-fill-mode: forwards;
+	}
+
+	@keyframes fade {
+	0% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(10px);
+		opacity: 0;
+	}
+	}
 </style>
-<div class="invintation">
+<div class="invintation invintation_game_{started ? 'active' : 'inactive'}">
 	<Header/>
-		<section>
+	<section>
 		Приглашаю на день рождения
 		{start.toLocaleString().slice(0, -3)}
 		<br/>

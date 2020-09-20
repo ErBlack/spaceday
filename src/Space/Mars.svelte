@@ -1,5 +1,5 @@
 <script>
-import Ship from './Ship.svelte';
+import Ship from './Game/Ship.svelte';
 import Satelite from './Satelite.svelte';
 import { mars } from './dimensions.js';
 import {
