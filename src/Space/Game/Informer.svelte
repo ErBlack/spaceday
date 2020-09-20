@@ -15,7 +15,7 @@
 
     const displaySpeed = (value) => (value >= 0 ? ' ' : '') + (value * 4).toFixed(2) + ' m/s';
     const displayAlt = (value) => (value * 2).toFixed(2) + 'm';
-    const displayPercents = (value) => `${value}%`;
+    const displayPercents = (value) => `${Math.round(value)}%`;
 
     GameState.addEventListener('change:active', ({value}) => active = value);
 

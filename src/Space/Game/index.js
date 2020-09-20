@@ -14,7 +14,8 @@ import {
     FRICTION,
     MAX_H_SPEED,
     MAX_V_SPEED,
-    SHIP_HEIGHT
+    SHIP_HEIGHT,
+    CONSUMPTION
 } from './constants';
 
 import { getY } from '../Mars';
@@ -65,6 +66,9 @@ const Game = {
 
         return (up ? 70 : 0) + (left || right ? 30 : 0);
     },
+    getFuelLoss(dt, boost) {
+        return dt * (boost / 100) * CONSUMPTION;
+    },
     update(dt) {
         const prevShip = GameState.ship;
         const ship = {...prevShip};
@@ -77,6 +81,8 @@ const Game = {
         ship.vSpeed = this.getVSpeed(dt);
         ship.hSpeed = this.getHSpeed(dt);
         ship.boost = this.getBoost();
+
+        ship.fuel = Math.max(ship.fuel - this.getFuelLoss(dt, ship.boost), 0);
 
         ship.x += ship.hSpeed;
         ship.y += ship.vSpeed;
