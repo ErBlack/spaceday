@@ -75,7 +75,7 @@ GameState.addEventListener('change:landStatus', ({value}) => {
 <div class="container">
     <div class="center">
         <svg class="space" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
-            <g transform="scale({MARS_SCALE_FACTOR})">
+            <g transform="scale({isWin ? 1 : MARS_SCALE_FACTOR})">
                 {#if isWin}
                     <ScaleFromMars/>
                 {/if}
