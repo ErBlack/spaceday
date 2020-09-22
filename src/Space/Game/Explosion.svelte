@@ -10,7 +10,7 @@ import {
 
 preload('/spaceday/explosion.gif');
 
-const offsetX = EXPLOSION_WIDTH / 2 - SHIP_WIDTH / 2;
+const offsetX = EXPLOSION_WIDTH / 2;
 const offsetY = EXPLOSION_HEIGHT / 2 - 10;
 
 let {

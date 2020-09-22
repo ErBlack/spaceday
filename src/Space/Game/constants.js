@@ -20,3 +20,9 @@ export const EXPLOSION_HEIGHT = 142;
 export const LANDING_LEFT = 4348;
 export const LANDING_RIGHT = 4413;
 export const LANDING_SPEED = 1;
+
+export const MAIN_ENGINE_WIDTH = 18;
+export const MAIN_ENGINE_HEIGHT = 54;
+
+export const FRICTION_ENGINE_WIDTH = 24;
+export const FRICTION_ENGINE_HEIGHT = 44;

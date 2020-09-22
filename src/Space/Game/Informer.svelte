@@ -39,6 +39,7 @@ pre {
     padding: 1em;
     margin: 0;
     animation: in .3s ease-out 1s forwards;
+    user-select: none;
 }
 
 @keyframes in {
