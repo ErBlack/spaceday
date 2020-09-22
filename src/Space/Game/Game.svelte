@@ -1,7 +1,7 @@
 <script>
 import { mars } from '../dimensions';
 import { Game, GameState } from './';
-import Ship from './Ship.svelte';
+import Ship from './Ship/Ship.svelte';
 import Explosion from './Explosion.svelte';
 import { SHIP_WIDTH, SHIP_HEIGHT, EXPLOSION_WIDTH } from './constants';
 

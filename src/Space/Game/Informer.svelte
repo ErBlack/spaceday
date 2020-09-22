@@ -10,7 +10,8 @@
             alt,
             boost,
             fuel
-        }
+        },
+        landStatus
     } = GameState;
 
     const displaySpeed = (value) => (value >= 0 ? ' ' : '') + (value * 4).toFixed(2) + ' m/s';
@@ -18,6 +19,7 @@
     const displayPercents = (value) => `${Math.round(value)}%`;
 
     GameState.addEventListener('change:active', ({value}) => active = value);
+    GameState.addEventListener('change:landStatus', ({value}) => landStatus = value);
 
     GameState.addEventListener('change:ship', ({value}) => {
         hSpeed = value.hSpeed;
@@ -53,7 +55,7 @@ pre {
     }
 }
 </style>
-{#if active}
+{#if active && !landStatus}
 <pre>
 H. SPEED  {displaySpeed(Math.abs(hSpeed))}
 V. SPEED  {displaySpeed(-vSpeed)}

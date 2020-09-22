@@ -9,8 +9,7 @@ const initialShipState = () => ({
     hSpeed: 0,
     alt: 0,
     boost: 0,
-    fuel: 100,
-    landed: false
+    fuel: 100
 });
 const initialState = () => ({
     active: false,

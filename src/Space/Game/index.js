@@ -132,7 +132,7 @@ const Game = {
             GameState.landStatus = this.getLandStatus();
         }
 
-        GameState.landStatus ? this.finishSound() : this.updateSound();
+        GameState.landStatus || !ship.fuel ? this.finishSound() : this.updateSound();
 
         ship.alt = bottomLimit - ship.y;
 
