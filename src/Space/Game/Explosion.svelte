@@ -24,7 +24,7 @@ let explosionTimeout;
 
 const explode = () => {
     clearTimeout(explosionTimeout);
-    setTimeout(() => {
+    explosionTimeout = setTimeout(() => {
         explosion = false;
     }, 1000);
     explosion = true; 

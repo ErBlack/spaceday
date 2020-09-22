@@ -6,7 +6,7 @@ import clicker from './clicker';
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
 
-const onClick = clicker(0, 250, startGame);
+const onClick = clicker(6, 250, startGame);
 
 </script>
 <style>

@@ -1,17 +1,16 @@
 <script>
 import {
     FROM_MARS,
-    PLANETARY_DURATION,
-    PLANETARY_SPLINES
+    MARS_SCALE_FACTOR
 } from './animations.js'
 </script>
 <animateTransform
     attributeName="transform"
     attributeType="XML"
     type="scale"
-    dur="{PLANETARY_DURATION}"
+    dur="110s"
     calcMode="spline"
-    keySplines="{PLANETARY_SPLINES}"
-    values="3500;1"
-    repeatCount="indefinite"
+    keySplines="0 1 1 1;0 0 1 1;"
+    values="{MARS_SCALE_FACTOR * 1.688};10;1"
+    repeatCount="1"
 />

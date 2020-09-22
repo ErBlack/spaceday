@@ -1,8 +1,6 @@
 import { mars } from '../dimensions.js';
 
-export const PLANETARY_DURATION = '100s';
-export const PLANETARY_SPLINES = '0 .7 0 1';
-export const MARS_SCALE_FACTOR = 3000;
+export const MARS_SCALE_FACTOR = 3500;
 
 export const FROM_MARS = {
     x: mars.x + mars.size / 2,

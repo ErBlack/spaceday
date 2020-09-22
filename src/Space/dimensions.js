@@ -1,41 +1,50 @@
 export const SYSTEM_RADIUS_PX = 2500;
 
+
 const DIMENSIONS = {
     sun: {
         distance: 0,
         size: SYSTEM_RADIUS_PX / 5
     },
     mercury: {
-        distance: 57909000 * 1.5,
-        realSize: 4879.4
+        distance: 57909000 * 3,
+        realSize: 4879.4,
+        year: 20
     },
     venus: {
-        distance: 108160000 * 1.5,
-        realSize: 12103.6
+        distance: 108160000 * 2,
+        realSize: 12103.6,
+        year: 25
     },
     earth: {
-        distance: 149600000 * 1.5,
-        realSize: 12756.3
+        distance: 149600000 * 2,
+        realSize: 12756.3,
+        year: 40
     },
     mars: {
         distance: 227990000 * 1.5,
-        realSize: 6792.4
+        realSize: 6792.4,
+        year: 68
     },
     jupiter: {
         distance: 778360000 * 1.2,
-        realSize: 142984
+        realSize: 142984,
+        year: 100
     },
     saturn: {
         distance: 1443500000,
-        realSize: 120536
+        realSize: 120536,
+        year: 200
     },
     uranus: {
         distance: 1872400000,
-        realSize: 51118
+        realSize: 51118,
+        year: 400
     },
     neptune: {
         distance: 4498400000 / 2,
-        realSize: 49528
+        realSize: 49528,
+        year: 450
     },
 };
 
@@ -58,7 +67,8 @@ const {
 } = Object.keys(DIMENSIONS).reduce((acc, key) => {
     const {
         distance,
-        realSize
+        realSize,
+        year
     } = DIMENSIONS[key];
     const size = realSize ? Math.round(realSize * PLANET_SIZE_COEFFICIENT) : DIMENSIONS[key].size;
     const r = size / 2;
@@ -72,6 +82,7 @@ const {
         y,
         r,
         offset,
+        year,
         centerX: x - r
     }
 

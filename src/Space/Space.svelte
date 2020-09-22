@@ -10,10 +10,34 @@ import Uranus from './Uranus.svelte';
 import Neptune from './Neptune.svelte';
 
 import ScaleFromMars from './Animations/ScaleFromMars.svelte';
-import TranslateFromMars from './Animations/TranslateFromMars.svelte';
-import { FROM_MARS, MARS_SCALE_FACTOR } from './Animations/animations.js';
+
+import { MARS_SCALE_FACTOR } from './Animations/animations.js';
 
 import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
+
+import { GameState } from './Game';
+import { final } from '../ost';
+
+let { landStatus } = GameState;
+
+let winTimeout;
+let isWin = false;
+
+const win = () => {
+    clearTimeout(winTimeout);
+    winTimeout = setTimeout(() => {
+        isWin = true;
+    }, 300);
+    final.play();
+}
+
+GameState.addEventListener('change:landStatus', ({value}) => {
+    landStatus = value;
+
+    if (value && value.success) {
+        win();
+    }
+});
 </script>
 <style>
 .container {
@@ -51,17 +75,19 @@ import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
 <div class="container">
     <div class="center">
         <svg class="space" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
-            <g transform="scale(3500)">
-            <!-- <ScaleFromMars/> -->
-            <Sun/>
-            <Mercury/>
-            <Venus/>
-            <Earth/>
-            <Mars/>
-            <Jupiter/>
-            <Saturn/>
-            <Uranus/>
-            <Neptune/>
+            <g transform="scale({isWin ? 1 : MARS_SCALE_FACTOR})">
+                {#if isWin}
+                    <ScaleFromMars/>
+                {/if}
+                <Sun/>
+                <Mercury/>
+                <Venus/>
+                <Earth/>
+                <Mars/>
+                <Jupiter/>
+                <Saturn/>
+                <Uranus/>
+                <Neptune/>
             </g>
         </svg>
     </div>
