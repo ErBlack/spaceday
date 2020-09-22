@@ -3,6 +3,7 @@ import {
     startGame,
     finishGame
 } from './GameState';
+import { main, friction } from '../../ost';
 import { Controls } from './Controls';
 import { atmosphereRadius } from '../Mars';
 import {
@@ -52,9 +53,9 @@ const Game = {
             }
         } = GameState;
 
-        if (landed || fuel === 0) return 0;
-        if (left) return Math.max(hSpeed - SHUTING * dt, -MAX_H_SPEED);
-        if (right) return Math.min(hSpeed + SHUTING * dt, MAX_H_SPEED);
+        if (landed) return 0;
+        if (left && fuel !== 0) return Math.max(hSpeed - SHUTING * dt, -MAX_H_SPEED);
+        if (right && fuel !== 0) return Math.min(hSpeed + SHUTING * dt, MAX_H_SPEED);
         if (Math.abs(hSpeed) > 0.001) return hSpeed - Math.sign(hSpeed) * FRICTION * dt;
         return 0;
     },
@@ -119,19 +120,37 @@ const Game = {
         ship.x += ship.hSpeed;
         ship.y += ship.vSpeed;
 
-        if (Math.abs(atmosphereRadius - ship.x) > MAX_X_OFFSET) console.log('away x');
-        if (ship.y < MAX_Y_OFFSET) console.log('away y');
+        if (Math.abs(atmosphereRadius - ship.x) > MAX_X_OFFSET) ship.x = prevShip.x;
+        if (ship.y < MAX_Y_OFFSET) ship.y = prevShip.y;
 
         const bottomLimit = getY(-ship.x) - SHIP_HEIGHT;
-        
+
         if (ship.y >= bottomLimit) {
             ship.y = bottomLimit;
             GameState.landStatus = this.getLandStatus();
         }
 
+        GameState.landStatus ? this.finishSound() : this.updateSound();
+
         ship.alt = bottomLimit - ship.y;
 
         GameState.ship = ship;
+    },
+    finishSound() {
+        main.pause();
+        main.currentTime = 0;
+        friction.pause();
+        friction.currentTime = 0;
+    },
+    updateSound() {
+        const {
+            up,
+            left,
+            right
+        } = Controls;
+
+        up ? main.play() : main.pause();
+        (left || right) ? friction.play() : friction.pause();
     }
 };
 

@@ -1,6 +1,7 @@
 <script>
 import { GameState } from './';
 import { Controls } from './Controls';
+import preload from '../../preloadImage';
 import {
     SHIP_WIDTH,
     SHIP_HEIGHT,
@@ -9,6 +10,8 @@ import {
     FRICTION_ENGINE_WIDTH,
     FRICTION_ENGINE_HEIGHT,
 } from './constants';
+
+preload('/spaceday/main.gif');
 
 const shipOffsetX = SHIP_WIDTH / 2;
 const mainOffsetX = MAIN_ENGINE_WIDTH / 2;
@@ -48,7 +51,7 @@ GameState.addEventListener('change:ship', ({value}) => {
 });
 
 </script>
-{#if !landStatus || landStatus.success}
+{#if !landStatus}
     {#if up && boost}
         <image xlink:href="/spaceday/main.gif" width="{MAIN_ENGINE_WIDTH}" height="{MAIN_ENGINE_HEIGHT}" x="{getMainX(x)}" y="{getMainY(y)}"/>
     {/if}
@@ -82,13 +85,7 @@ GameState.addEventListener('change:ship', ({value}) => {
         </g>
     </svg>
     {/if}
+{/if}
+{#if !landStatus || landStatus.success}
     <image xlink:href="/spaceday/rocket.png" width="{SHIP_WIDTH}" height="{SHIP_HEIGHT}" x="{getShipX(x)}" y="{y}"/>
 {/if}
-
-
-
-
-
-
-
-
