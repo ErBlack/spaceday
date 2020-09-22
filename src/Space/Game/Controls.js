@@ -48,15 +48,18 @@ const onmouseup = () => {
 const onkeydown = ({key}) => {
     switch (key) {
         case 'ArrowUp':
+        case 'w':
+        case 'ц':
             keyControls.up = true;
             break;
-        case 'ArrowDown':
-            keyControls.down = true;
-            break;
         case 'ArrowLeft':
+        case 'a':
+        case 'ф':
             keyControls.left = true;
             break;
         case 'ArrowRight':
+        case 'd':
+        case 'в':
             keyControls.right = true;
             break;
     }
@@ -65,15 +68,18 @@ const onkeydown = ({key}) => {
 const onkeyup = ({key}) => {
     switch (key) {
         case 'ArrowUp':
+        case 'w':
+        case 'ц':
             keyControls.up = false;
             break;
-        case 'ArrowDown':
-            keyControls.down = false;
-            break;
         case 'ArrowLeft':
+        case 'a':
+        case 'ф':
             keyControls.left = false;
             break;
         case 'ArrowRight':
+        case 'd':
+        case 'в':
             keyControls.right = false;
             break;
     }

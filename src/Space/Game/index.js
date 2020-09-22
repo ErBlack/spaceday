@@ -15,7 +15,6 @@ import {
     FRICTION,
     MAX_H_SPEED,
     MAX_V_SPEED,
-    SHIP_HEIGHT,
     CONSUMPTION,
     LANDING_LEFT,
     LANDING_RIGHT,
@@ -23,6 +22,9 @@ import {
 } from './constants';
 
 import { getY } from '../Mars';
+
+let mainPlaying = false;
+let shuttingPlaying = false;
 
 const Game = {
     getVSpeed(dt) {
@@ -123,7 +125,7 @@ const Game = {
         if (Math.abs(atmosphereRadius - ship.x) > MAX_X_OFFSET) ship.x = prevShip.x;
         if (ship.y < MAX_Y_OFFSET) ship.y = prevShip.y;
 
-        const bottomLimit = getY(-ship.x) - SHIP_HEIGHT;
+        const bottomLimit = getY(ship.x);
 
         if (ship.y >= bottomLimit) {
             ship.y = bottomLimit;
@@ -149,8 +151,20 @@ const Game = {
             right
         } = Controls;
 
-        up ? main.play() : main.pause();
-        (left || right) ? friction.play() : friction.pause();
+        this.playMain(up);
+        this.playShutting(left || right)
+    },
+    playMain(mode) {
+        if (mainPlaying !== mode) {
+            mode ? main.play() : main.pause();
+            mainPlaying = mode;
+        }
+    },
+    playShutting(mode) {
+        if (shuttingPlaying !== mode) {
+            mode ? friction.play() : friction.pause();
+            shuttingPlaying = mode;
+        }
     }
 };
 
