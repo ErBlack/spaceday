@@ -4,8 +4,6 @@ export default class State {
     constructor(state = {}) {
         const proxy = new Proxy(state, this);
 
-        this._pendingTimeout = null;
-        this._pendingChanges = {};
         this._emitter = new EventEmitter();
 
         this.addEventListener = this._emitter.addListener.bind(this._emitter);
@@ -28,7 +26,7 @@ export default class State {
             return true;
         }
 
-        this._queueChange(key, {
+        this._emitChanges(key, {
             value,
             oldValue: state[key],
             type: key in state ? 'change' : 'add',
@@ -44,7 +42,7 @@ export default class State {
     deleteProperty(state, key) {
         if (key in state) {
             delete state[key];
-            this._queueChange(key, undefined);
+            this._emitChanges(key, undefined);
         }
         return true;
     }
@@ -54,32 +52,10 @@ export default class State {
     ownKeys(state) {
         return Object.keys(state);
     }
-    _queueChange(key, change) {
-        clearTimeout(this._pendingTimeout);
-
-        if (key in this._pendingChanges && this._pendingChanges[key].oldValue === change.value) {
-            delete this._pendingChanges[key];
-        } else {
-            this._pendingChanges[key] = change;
-        }
-
-        this._pendingTimeout = setTimeout(() => {
-            this._pendingTimeout = null;
-
-            this._emitChanges(this._pendingChanges);
-
-            this._pendingChanges = {};
-        }, 0);
-    }
-    _emitChanges(changes) {
-        const keys = Object.keys(changes);
-
-        if (keys.length === 0) {
-            return;
-        }
-
-        keys.forEach(key => this._emitter.emit(`change:${key}`, changes[key]));
-
-        this._emitter.emit('change', changes);
+    _emitChanges(key, change) {
+        this._emitter.emit(`change:${key}`, change);
+        this._emitter.emit('change', {
+            [key]: change
+        });
     }
 };
