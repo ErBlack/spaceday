@@ -11,6 +11,6 @@ import {
     dur="110s"
     calcMode="spline"
     keySplines="0 1 1 1;0 0 1 1;"
-    values="{MARS_SCALE_FACTOR * 1.688};10;1"
+    values="{MARS_SCALE_FACTOR * 1.6889};10;1"
     repeatCount="1"
 />
