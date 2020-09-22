@@ -11,8 +11,6 @@ import Neptune from './Neptune.svelte';
 
 import ScaleFromMars from './Animations/ScaleFromMars.svelte';
 
-import { MARS_SCALE_FACTOR } from './Animations/animations.js';
-
 import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
 
 import { GameState } from './Game';
@@ -60,6 +58,14 @@ GameState.addEventListener('change:landStatus', ({value}) => {
     transform: translate(-50%, -50%);
 }
 
+.system {
+    transform: scale(3500);
+}
+
+.system_win {
+    animation: zoom 110s cubic-bezier(0,1,0,1) forwards;
+}
+
 @media (orientation: portrait) {
     .space {
         height: 100vh;
@@ -71,14 +77,21 @@ GameState.addEventListener('change:landStatus', ({value}) => {
     }
 }
 
+@keyframes zoom {
+    0% {
+        transform: scale(3500);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
 </style>
 <div class="container">
     <div class="center">
         <svg class="space" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
-            <g transform="scale({isWin ? 1 : MARS_SCALE_FACTOR})">
-                {#if isWin}
-                    <ScaleFromMars/>
-                {/if}
+            <g class="system{isWin ? ' system_win' : ''}" transform="scale({1})">
                 <Sun/>
                 <Mercury/>
                 <Venus/>
