@@ -9,8 +9,6 @@ import Saturn from './Saturn.svelte';
 import Uranus from './Uranus.svelte';
 import Neptune from './Neptune.svelte';
 
-import ScaleFromMars from './Animations/ScaleFromMars.svelte';
-
 import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
 
 import { GameState } from './Game';

@@ -1,6 +1,5 @@
 export const SYSTEM_RADIUS_PX = 2500;
 
-
 const DIMENSIONS = {
     sun: {
         distance: 0,
@@ -9,17 +8,17 @@ const DIMENSIONS = {
     mercury: {
         distance: 57909000 * 3,
         realSize: 4879.4,
-        year: 20
+        year: 30
     },
     venus: {
         distance: 108160000 * 2,
         realSize: 12103.6,
-        year: 25
+        year: 40
     },
     earth: {
         distance: 149600000 * 2,
         realSize: 12756.3,
-        year: 40
+        year: 60
     },
     mars: {
         distance: 227990000 * 1.5,
@@ -34,17 +33,17 @@ const DIMENSIONS = {
     saturn: {
         distance: 1443500000,
         realSize: 120536,
-        year: 200
+        year: 150
     },
     uranus: {
         distance: 1872400000,
         realSize: 51118,
-        year: 400
+        year: 200
     },
     neptune: {
         distance: 4498400000 / 2,
         realSize: 49528,
-        year: 450
+        year: 250
     },
 };
 
