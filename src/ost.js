@@ -14,20 +14,26 @@ export const friction = loadSound('/spaceday/friction.mp3');
 export const explosion = loadSound('/spaceday/explosion.mp3');
 
 
-let first = true;
+let i = 0;
 const initSound = () => {
-    if (first) {
-        first = false;
-        return;
+    switch (i) {
+        case 1:
+            [final, main, friction, explosion].forEach(audio => {
+                audio.volume = 0;
+                audio.play();
+            });
+            break;
+        case 5:
+            [final, main, friction, explosion].forEach(audio => {
+                audio.volume = 1;
+                audio.pause();
+                audio.currentTime = 0;
+            });
+            document.removeEventListener('touchstart', initSound);
+            break;
     }
-    [final, main, friction, explosion].forEach(audio => {
-        audio.play();
-        audio.pause();
-    });
 
-    final.play();
-
-    document.removeEventListener('touchstart', initSound);
+    i++;
 }
 
 document.addEventListener('touchstart', initSound)
