@@ -25,6 +25,8 @@ const initSound = () => {
         audio.pause();
     });
 
+    final.play();
+
     document.removeEventListener('touchstart', initSound);
 }
 
