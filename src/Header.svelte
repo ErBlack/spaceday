@@ -1,12 +1,16 @@
 <script>
 import { startGame, GameState } from './Space/Game';
 import clicker from './clicker';
+import { initSound } from 'ost';
 
 	let active = GameState.active;
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
 
-const onClick = clicker(6, 250, startGame);
+const onClick = clicker(6, 250, () => {
+  startGame();
+  initSound();
+});
 
 </script>
 <style>
@@ -17,18 +21,21 @@ h1 {
 }
 
 .rocket {
+    border: none;
+    background-color: transparent;
     background-image: url("/spaceday/rocket.png");
     background-size: contain;
     background-position: center;
     display: inline-block;
     background-repeat: no-repeat;
+    margin: 0;
     width: 1em;
     height: 1.5em;
-    line-height: 1.4em;
+    line-height: 1em;
     white-space: pre;
-    user-select: none;
     cursor: pointer;
     user-select: none;
+    vertical-align: middle;
 }
 
 .title {
@@ -76,4 +83,4 @@ h1 {
   }
 }
 </style>
-<h1 class="{active ? 'active' : 'inactive'}"><span class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</span> <span class="title">Space Day</span></h1>
+<h1 class="{active ? 'active' : 'inactive'}"><button class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</button> <span class="title">Space Day</span></h1>
