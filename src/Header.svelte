@@ -1,7 +1,7 @@
 <script>
 import { startGame, GameState } from './Space/Game';
 import clicker from './clicker';
-import { initSound } from 'ost';
+import { initSound } from './ost';
 
 	let active = GameState.active;
 
