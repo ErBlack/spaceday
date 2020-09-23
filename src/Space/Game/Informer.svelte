@@ -36,12 +36,12 @@ pre {
     left: 0;
     top: 0;
     z-index: 11;
-    font-family: 'VT323' monospace;
     color: #fff;
     padding: 1em;
     margin: 0;
     animation: in .3s ease-out 1s forwards;
     user-select: none;
+    pointer-events: none;
 }
 
 @keyframes in {
