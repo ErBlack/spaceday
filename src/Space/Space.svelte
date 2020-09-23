@@ -10,8 +10,16 @@ import Uranus from './Uranus.svelte';
 import Neptune from './Neptune.svelte';
 
 import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
+import encrypt from '../encrypt';
+const getCode = () => {
+    if (!localStorage.getItem('code')) {
+        localStorage.setItem('code', encrypt(String(Date.now()).slice(0, -1)));
+    }
 
-import { GameState } from './Game';
+    return localStorage.getItem('code');
+};
+
+import { GameState, finishGame } from './Game';
 import { final } from '../ost';
 
 let { landStatus } = GameState;
@@ -20,11 +28,18 @@ let winTimeout;
 let isWin = false;
 
 const win = () => {
+    const code = getCode();
     clearTimeout(winTimeout);
     winTimeout = setTimeout(() => {
         isWin = true;
     }, 300);
+
     final.play();
+
+    setTimeout(() => {
+        prompt('Позравляю! Теперь пришли мне код, чтобы узнать, был ли ты первым', code);
+        finishGame();
+    }, 111000)
 }
 
 GameState.addEventListener('change:landStatus', ({value}) => {
@@ -33,6 +48,10 @@ GameState.addEventListener('change:landStatus', ({value}) => {
     if (value && value.success) {
         win();
     }
+});
+
+GameState.addEventListener('change:active', ({value}) => {
+    if (value) isWin = false;
 });
 </script>
 <style>

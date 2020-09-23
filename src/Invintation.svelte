@@ -4,7 +4,7 @@
 	import Twitter from './Twitter.svelte';
 	import Header from './Header.svelte';
 	import { GameState } from './Space/Game';
-	
+
 	let active = GameState.active;
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
