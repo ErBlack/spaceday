@@ -40,7 +40,7 @@ const win = () => {
     setTimeout(() => {
         prompt('Позравляю! Теперь пришли мне код, чтобы узнать, был ли ты первым', code);
         finishGame();
-    }, 111000)
+    }, 113000)
 }
 
 GameState.addEventListener('change:landStatus', ({value}) => {

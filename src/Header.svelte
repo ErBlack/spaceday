@@ -2,14 +2,17 @@
 import { startGame, GameState } from './Space/Game';
 import clicker from './clicker';
 import { initSound } from './ost';
+import { isAvailable } from './EggTimer';
 
 	let active = GameState.active;
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
 
 const onClick = clicker(6, 250, () => {
-  startGame();
-  initSound();
+  if (isAvailable() || location.search === '?debug') {
+    startGame();
+    initSound();
+  }
 });
 
 </script>

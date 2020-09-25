@@ -5,6 +5,8 @@
 	import Header from './Header.svelte';
 	import { GameState } from './Space/Game';
 
+	import { isAvailable, eggStart } from './EggTimer';
+
 	let active = GameState.active;
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
@@ -74,8 +76,15 @@
 		<br/>
 		приходите в любое время с 14:00 до 21:00
 		<br/>
-		Начало через	<Timer start={start}/>
-		<br/><br/>
+		{#if isAvailable()}
+		Начало через <Timer start={start}/>
+		{/if}
+		{#if !isAvailable()}
+		<br/>
+		🥚 Пасхалка заработает через <Timer start={eggStart}/>
+		{/if}
+		<br>
+		<br/>
 		<a href="https://yandex.ru/maps/-/CCQxr8VeOC">
 			Проспект Александровской Фермы 8<br>
 			<span class="address">

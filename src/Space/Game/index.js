@@ -96,8 +96,6 @@ const Controller = {
             y
         };
 
-        return status;
-
         if (x < LANDING_LEFT || x > LANDING_RIGHT) {
             status.success = false;
             status.wrongPlace = true;
