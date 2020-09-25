@@ -1,6 +1,5 @@
 <script>
-import Game from '../Game/Game.svelte';
-import Explosion from '../Game/Explosion.svelte';
+import { Game } from '../Game';
 import Satelite from './Satelite.svelte';
 import Phobos from './Phobos.svelte';
 import Deimos from './Deimos.svelte';
@@ -10,12 +9,15 @@ import {
     atmosphereRadius,
     radius,
     size,
-    offset
+    width,
+    height,
+    x,
+    y
 } from './Mars.js';
 
 </script>
 <g class="Mars">
-<svg xmlns="http://www.w3.org/2000/svg" height="{mars.size + offset}" width="{mars.size + offset}" viewBox="0 0 {size} {size}" x="{mars.x - offset / 2}" y="{mars.y - offset / 2}">
+<svg xmlns="http://www.w3.org/2000/svg" height="{height}" width="{width}" viewBox="0 0 {size} {size}" x="{x}" y="{y}">
     <radialGradient id="mars-atmosphere" cx="50%" y="50%">
         <stop offset="66%" stop-color="rgb(48,73,111,.7)"/>
         <stop offset="76%" stop-color="rgb(48,73,111,0)"/>

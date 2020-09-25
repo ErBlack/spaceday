@@ -8,6 +8,7 @@ import Jupiter from './Jupiter.svelte';
 import Saturn from './Saturn.svelte';
 import Uranus from './Uranus.svelte';
 import Neptune from './Neptune.svelte';
+import { Signal } from './Game';
 
 import { SYSTEM_RADIUS_PX, mars } from './dimensions.js';
 import encrypt from '../encrypt';
@@ -118,6 +119,7 @@ GameState.addEventListener('change:active', ({value}) => {
                 <Saturn/>
                 <Uranus/>
                 <Neptune/>
+                <Signal/>
             </g>
         </svg>
     </div>

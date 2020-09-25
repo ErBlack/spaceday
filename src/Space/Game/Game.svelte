@@ -1,6 +1,6 @@
 <script>
 import { mars } from '../dimensions';
-import { Game, GameState } from './';
+import { Controller, GameState } from './';
 import Ship from './Ship/Ship.svelte';
 import Explosion from './Explosion.svelte';
 import { SHIP_WIDTH, SHIP_HEIGHT, EXPLOSION_WIDTH } from './constants';
@@ -16,7 +16,7 @@ const loop = () => {
 
     const dt = Date.now() - time;
 
-    Game.update(dt);
+    Controller.update(dt);
 
     time += dt;
 

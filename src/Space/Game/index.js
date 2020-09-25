@@ -1,3 +1,6 @@
+import Game from './Game.svelte';
+import Signal from './Signal.svelte';
+
 import {
     GameState,
     startGame,
@@ -26,7 +29,7 @@ import { getY } from '../Mars';
 let mainPlaying = false;
 let shuttingPlaying = false;
 
-const Game = {
+const Controller = {
     getVSpeed(dt) {
         const {up} = Controls;
         const {
@@ -78,6 +81,7 @@ const Game = {
     getLandStatus() {
         const {
             x,
+            y,
             hSpeed,
             vSpeed
         } = GameState.ship;
@@ -87,7 +91,9 @@ const Game = {
             wrongPlace: false,
             wrongSpeed: false,
             wrongHorizontalSpeed: false,
-            landSpeed: vSpeed
+            landSpeed: vSpeed,
+            x,
+            y
         };
 
         if (x < LANDING_LEFT || x > LANDING_RIGHT) {
@@ -170,6 +176,8 @@ const Game = {
 
 export { 
     Game,
+    Signal,
+    Controller,
     GameState,
     startGame,
     finishGame
