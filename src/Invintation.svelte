@@ -70,9 +70,11 @@
 	<Header/>
 	<section>
 		Приглашаю на день рождения
-		{start.toLocaleString().slice(0, -3)}
+		{start.getDate()} октября
 		<br/>
-		Приходите через	<Timer start={start}/>
+		приходите в любое время с 14:00 до 21:00
+		<br/>
+		Начало через	<Timer start={start}/>
 		<br/><br/>
 		<a href="https://yandex.ru/maps/-/CCQxr8VeOC">
 			Проспект Александровской Фермы 8<br>
