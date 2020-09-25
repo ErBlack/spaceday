@@ -1,8 +1,10 @@
 <script>
-import Game from './Game/Game.svelte';
-import Explosion from './Game/Explosion.svelte';
+import Game from '../Game/Game.svelte';
+import Explosion from '../Game/Explosion.svelte';
 import Satelite from './Satelite.svelte';
-import { mars } from './dimensions.js';
+import Phobos from './Phobos.svelte';
+import Deimos from './Deimos.svelte';
+import { mars } from '../dimensions.js';
 import {
     atmosphere,
     atmosphereRadius,
@@ -40,6 +42,9 @@ import {
     <Satelite/>
 
     <Game/>
+
+    <Phobos/>
+    <Deimos/>
 
     <circle class="body" cx="{atmosphereRadius}" cy="{atmosphereRadius}" r="{radius}" fill="#ac3838"/>
     <circle class="light" cx="{atmosphereRadius}" cy="{atmosphereRadius}" r="{radius}" fill="url(#mars-light)"/>

@@ -1,5 +1,5 @@
-import { mars } from './dimensions';
-import { SHIP_HEIGHT } from './Game/constants';
+import { mars } from '../dimensions';
+import { SHIP_HEIGHT } from '../Game/constants';
 export const radius = 3000;
 export const atmosphere = 1500;
 export const atmosphereRadius= radius + atmosphere;

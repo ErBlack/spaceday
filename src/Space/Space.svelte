@@ -3,7 +3,7 @@ import Sun from './Sun.svelte';
 import Mercury from './Mercury.svelte';
 import Venus from './Venus.svelte';
 import Earth from './Earth.svelte';
-import Mars from './Mars.svelte';
+import { Mars } from './Mars';
 import Jupiter from './Jupiter.svelte';
 import Saturn from './Saturn.svelte';
 import Uranus from './Uranus.svelte';
