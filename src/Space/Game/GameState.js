@@ -1,5 +1,5 @@
 import State from '../../State';
-import { atmosphereRadius } from '../Mars';
+import { atmosphereRadius } from '../Mars/Mars';
 
 
 const initialShipState = () => ({

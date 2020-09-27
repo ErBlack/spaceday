@@ -3,7 +3,7 @@
     import {
         marsXToSpace,
         marsYToSpace,
-    } from '../Mars';
+    } from '../Mars/Mars';
     import {SYSTEM_RADIUS_PX} from '../dimensions';
     import {GameState} from './GameState';
 

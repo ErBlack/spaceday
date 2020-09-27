@@ -1,5 +1,5 @@
 <script>
-import { GameState } from './';
+import { GameState } from './GameState';
 import preload from '../../preloadImage';
 import { explosion as sound } from '../../ost';
 import {

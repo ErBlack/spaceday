@@ -70,7 +70,7 @@
 
 			return `${result.join(' ')} ${d2(hours)}ч ${d2(minutes)}м ${d2(seconds)}с`;
 		} else {
-			return 'Времени не осталось';
+			return '🚀';
 		}
 	}
 </script>
