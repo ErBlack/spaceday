@@ -9,10 +9,13 @@ import {
     SHIP_WIDTH
 } from './constants';
 
-preload('/spaceday/explosion.gif');
+preload('/spaceday/explosion.gif?i=0');
+preload('/spaceday/explosion.gif?i=1')
 
 const offsetX = EXPLOSION_WIDTH / 2;
 const offsetY = EXPLOSION_HEIGHT / 2 - 10;
+
+let i = 0;
 
 let {
     landStatus,
@@ -34,6 +37,8 @@ const explode = () => {
 
 GameState.addEventListener('change:landStatus', ({value}) => {
     if (value && !value.success) {
+        i = i ? 0 : 1;
+
         explode();
     }
 });
@@ -47,5 +52,5 @@ const getY = (y) => y - offsetY;
 
 </script>
 {#if explosion}
-    <image xlink:href="/spaceday/explosion.gif" width="{EXPLOSION_WIDTH}" height="{EXPLOSION_HEIGHT}" x="{getX(x)}" y="{getY(y)}"/>
+    <image xlink:href="/spaceday/explosion.gif?i={i}" width="{EXPLOSION_WIDTH}" height="{EXPLOSION_HEIGHT}" x="{getX(x)}" y="{getY(y)}"/>
 {/if}
