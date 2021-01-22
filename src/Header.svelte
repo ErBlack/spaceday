@@ -8,7 +8,7 @@ import { isAvailable } from './EggTimer';
 
 	GameState.addEventListener('change:active', ({value}) => active = value);
 
-const onClick = clicker(6, 250, () => {
+const onClick = clicker(1, 250, () => {
   if (isAvailable() || location.search === '?debug') {
     startGame();
     initSound();

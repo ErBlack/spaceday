@@ -38,7 +38,6 @@ const win = () => {
     final.play();
 
     setTimeout(() => {
-        alert('Позравляю! Но ты не был первым)');
         finishGame();
     }, 113000)
 }

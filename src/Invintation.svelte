@@ -70,6 +70,7 @@
 </style>
 <div class="invintation invintation_game_{active ? 'active' : 'inactive'}">
 	<Header/>
+	{#if !isAvailable()}
 	<section>
 		Приглашаю на день рождения
 		{start.getDate()} октября
@@ -94,4 +95,5 @@
 		<br/><br/>
 		<Links/>
 	</section>
+	{/if}
 </div>
