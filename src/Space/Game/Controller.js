@@ -102,6 +102,8 @@ export const Controller = {
             status.wrongHorizontalSpeed = true;
         }
 
+        status.success=true;
+
         return status;
     },
     update(dt) {

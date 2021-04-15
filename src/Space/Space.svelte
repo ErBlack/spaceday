@@ -72,11 +72,14 @@ GameState.addEventListener('change:active', ({value}) => {
     left: 50%;
 }
 .space {
-    transform: translate(-50%, -50%);
+    will-change: transform;
+    transform: translate3d(-50%, -50%, 0) scale(1, 1);
+    backface-visibility: hidden;
 }
 
 .system {
-    transform: scale(3500);
+    transform: scale3d(3500, 3500, 1);
+    backface-visibility: hidden;
 }
 
 .system_win {
@@ -96,19 +99,21 @@ GameState.addEventListener('change:active', ({value}) => {
 
 @keyframes zoom {
     0% {
-        transform: scale(3500);
+        transform: scale3d(3500, 3500, 1);
+        backface-visibility: hidden;
     }
 
     100% {
-        transform: scale(1);
+        transform: scale3d(1, 1, 1);
+        backface-visibility: hidden;
     }
 }
 
 </style>
 <div class="container">
     <div class="center">
-        <svg class="space" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
-            <g class="system{isWin ? ' system_win' : ''}" transform="scale({1})">
+        <svg class="space" shape-rendering="geometricPrecision" viewBox="{-SYSTEM_RADIUS_PX} {-SYSTEM_RADIUS_PX} {SYSTEM_RADIUS_PX * 2} {SYSTEM_RADIUS_PX * 2}">
+            <g class="system{isWin ? ' system_win' : ''}">
                 <Sun/>
                 <Mercury/>
                 <Venus/>
