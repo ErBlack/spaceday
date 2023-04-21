@@ -86,4 +86,4 @@ h1 {
   }
 }
 </style>
-<h1 class="{active ? 'active' : 'inactive'}"><button class="rocket" on:click={onClick} on:touchstart={onClick}>⠀</button> <span class="title">Space Day</span></h1>
+<h1 class="{active ? 'active' : 'inactive'}"><button class="rocket" on:click={onClick} on:touchstart={onClick}></button> <span class="title">Space Day</span></h1>

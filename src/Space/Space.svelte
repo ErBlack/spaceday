@@ -80,6 +80,8 @@ GameState.addEventListener('change:active', ({value}) => {
 .system {
     transform: scale3d(3500, 3500, 1);
     backface-visibility: hidden;
+    will-change: transform;
+    transform-style: flat; 
 }
 
 .system_win {
